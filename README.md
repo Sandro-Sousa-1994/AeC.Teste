@@ -94,7 +94,7 @@ AeC.Teste.Web
 
 Tela de autenticação da aplicação utilizando Cookie Authentication.
 
-![Tela de Login](docs/images/1 - login.png)
+![Tela de Login](docs/images/login.png)
 
 ---
 
@@ -102,7 +102,7 @@ Tela de autenticação da aplicação utilizando Cookie Authentication.
 
 Tela de listagem de usuários, permitindo cadastro, edição, exclusão e exportação dos dados em CSV.
 
-![Tela de Usuários](docs/images/2 - users.png)
+![Tela de Usuários](docs/images/users.png)
 
 ---
 
@@ -110,7 +110,7 @@ Tela de listagem de usuários, permitindo cadastro, edição, exclusão e export
 
 Tela de listagem de endereços cadastrados e vinculados aos usuários.
 
-![Tela de Endereços](docs/images/3 - addresses.png)
+![Tela de Endereços](docs/images/addresses.png)
 
 ---
 
@@ -118,7 +118,7 @@ Tela de listagem de endereços cadastrados e vinculados aos usuários.
 
 Consulta automática de endereço por CEP utilizando a API ViaCEP, preenchendo os campos de rua, bairro, cidade e estado.
 
-![Integração ViaCEP](docs/images/4 - viacep.png)
+![Integração ViaCEP](docs/images/viacep.png)
 
 
 

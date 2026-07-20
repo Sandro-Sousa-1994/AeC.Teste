@@ -2,13 +2,6 @@
   <Folder Name="/database/">
     <File Path="001_CreateTables.sql" />
   </Folder>
-  <Folder Name="/doc/" />
-  <Folder Name="/doc/images/">
-    <File Path="../../../../Pictures/1 - login.png" />
-    <File Path="../../../../Pictures/2 - users.png" />
-    <File Path="../../../../Pictures/3 - addresses.png" />
-    <File Path="../../../../Pictures/4 - viacep.png" />
-  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
     <File Path="README.md" />
