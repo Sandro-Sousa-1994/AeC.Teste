@@ -88,6 +88,40 @@ AeC.Teste.Web
 
 ---
 
+## Telas da aplicação
+
+### Login
+
+Tela de autenticação da aplicação utilizando Cookie Authentication.
+
+![Tela de Login](docs/images/1 - login.png)
+
+---
+
+### Gerenciamento de Usuários
+
+Tela de listagem de usuários, permitindo cadastro, edição, exclusão e exportação dos dados em CSV.
+
+![Tela de Usuários](docs/images/2 - users.png)
+
+---
+
+### Gerenciamento de Endereços
+
+Tela de listagem de endereços cadastrados e vinculados aos usuários.
+
+![Tela de Endereços](docs/images/3 - addresses.png)
+
+---
+
+### Cadastro de Endereço com ViaCEP
+
+Consulta automática de endereço por CEP utilizando a API ViaCEP, preenchendo os campos de rua, bairro, cidade e estado.
+
+![Integração ViaCEP](docs/images/4 - viacep.png)
+
+
+
 ## Como executar
 
 ### 1. Configurar a Connection String
