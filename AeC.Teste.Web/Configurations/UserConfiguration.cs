@@ -20,7 +20,7 @@ namespace AeC.Teste.Web.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(x => x.Password)
+            builder.Property(x => x.PasswordHash)
                 .HasMaxLength(255)
                 .IsRequired();
 
