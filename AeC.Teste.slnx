@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/database/" />
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="AeC.Teste.Web/AeC.Teste.Web.csproj" />
+</Solution>
