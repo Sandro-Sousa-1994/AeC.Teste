@@ -1,0 +1,82 @@
+@model AeC.Teste.Web.ViewModels.AddressCreateViewModel
+
+@{
+    ViewData["Title"] = "Novo Endereço";
+}
+
+<div class="container mt-4">
+
+    <h2>Novo Endereço</h2>
+
+    <hr />
+
+    <form asp-action="Create" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Cep" class="form-label"></label>
+            <input asp-for="Cep" class="form-control" />
+            <span asp-validation-for="Cep" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Street" class="form-label"></label>
+            <input asp-for="Street" class="form-control" />
+            <span asp-validation-for="Street" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Number" class="form-label"></label>
+            <input asp-for="Number" class="form-control" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Complement" class="form-label"></label>
+            <input asp-for="Complement" class="form-control" />
+            <span asp-validation-for="Complement" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="District" class="form-label"></label>
+            <input asp-for="District" class="form-control" />
+            <span asp-validation-for="District" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="City" class="form-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="State" class="form-label"></label>
+            <input asp-for="State" class="form-control" />
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UserId" class="form-label"></label>
+            <select asp-for="UserId" asp-items="(IEnumerable<SelectListItem>)ViewBag.Users" class="form-select">
+                <option value="">-- Selecione um usuário --</option>
+            </select>
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Salvar
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Voltar
+        </a>
+
+    </form>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -13,7 +13,7 @@ namespace AeC.Teste.Web.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Cep)
-                .HasMaxLength(8)
+                .HasMaxLength(9)
                 .IsRequired();
 
             builder.Property(x => x.Street)

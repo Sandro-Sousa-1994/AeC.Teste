@@ -41,6 +41,8 @@ namespace AeC.Teste.Web.Extensions
 
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IAddressService, AddressService>();
+
             return services;
         }
     }
