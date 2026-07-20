@@ -16,8 +16,14 @@
 
         <div class="mb-3">
             <label asp-for="Cep" class="form-label"></label>
-            <input asp-for="Cep" class="form-control" />
+            <div class="input-group">
+                <input asp-for="Cep" class="form-control" id="cepInput" />
+                <button type="button" class="btn btn-outline-secondary" id="searchCepBtn">
+                    Buscar CEP
+                </button>
+            </div>
             <span asp-validation-for="Cep" class="text-danger"></span>
+            <small id="cepMessage" class="d-block mt-2"></small>
         </div>
 
         <div class="mb-3">
@@ -79,4 +85,47 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById('searchCepBtn').addEventListener('click', async function() {
+            const cep = document.getElementById('cepInput').value.trim();
+            const messageEl = document.getElementById('cepMessage');
+
+            if (!cep) {
+                messageEl.textContent = 'Digite um CEP primeiro.';
+                messageEl.className = 'text-danger d-block mt-2';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/Addresses/GetAddressByCep?cep=${encodeURIComponent(cep)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('Street').value = data.street || '';
+                    document.getElementById('District').value = data.district || '';
+                    document.getElementById('City').value = data.city || '';
+                    document.getElementById('State').value = data.state || '';
+
+                    messageEl.textContent = 'CEP encontrado com sucesso!';
+                    messageEl.className = 'text-success d-block mt-2';
+                } else {
+                    messageEl.textContent = data.message || 'CEP não encontrado. Verifique e tente novamente.';
+                    messageEl.className = 'text-warning d-block mt-2';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Erro ao consultar CEP. Tente novamente.';
+                messageEl.className = 'text-danger d-block mt-2';
+                console.error('Erro:', error);
+            }
+        });
+
+        // Permitir buscar o CEP ao pressionar Enter
+        document.getElementById('cepInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('searchCepBtn').click();
+            }
+        });
+    </script>
 }
