@@ -10,10 +10,12 @@ namespace AeC.Teste.Web.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ICsvService _csvService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, ICsvService csvService)
         {
             _userService = userService;
+            _csvService = csvService;
         }
 
         public async Task<IActionResult> Index()
@@ -89,6 +91,24 @@ namespace AeC.Teste.Web.Controllers
                 return NotFound();
 
             return View(user);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportCsv()
+        {
+            var users = await _userService.GetAllAsync();
+
+            var exportData = users.Select(u => new UserExportViewModel
+            {
+                Nome = u.Name,
+                Usuário = u.Username
+            }).ToList();
+
+            var csvBytes = _csvService.GenerateCsv(exportData);
+
+            var fileName = $"usuarios_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+
+            return File(csvBytes, "text/csv; charset=utf-8", fileName);
         }
 
         [HttpPost]
