@@ -8,7 +8,7 @@ namespace AeC.Teste.Web.Services.Interfaces
 
         Task<UserEditViewModel?> GetByIdAsync(int id);
 
-        Task<bool> UsernameExistsAsync(string username);
+        Task<bool> UsernameExistsAsync(string username, int? ignoreUserId = null);
 
         Task CreateAsync(UserCreateViewModel model);
 

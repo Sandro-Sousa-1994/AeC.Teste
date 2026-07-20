@@ -48,5 +48,56 @@ namespace AeC.Teste.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var user = await _userService.GetByIdAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (await _userService.UsernameExistsAsync(model.Username, model.Id))
+            {
+                ModelState.AddModelError(nameof(model.Username),
+                    "Já existe um usuário com esse nome de usuário.");
+
+                return View(model);
+            }
+
+            await _userService.UpdateAsync(model);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await _userService.GetByIdAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id, UserEditViewModel model)
+        {
+            await _userService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

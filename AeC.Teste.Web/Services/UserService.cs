@@ -32,9 +32,18 @@ namespace AeC.Teste.Web.Services
                 .ToListAsync();
         }
 
-        public Task<UserEditViewModel?> GetByIdAsync(int id)
+        public async Task<UserEditViewModel?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => new UserEditViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Username = x.Username
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task CreateAsync(UserCreateViewModel model)
@@ -52,20 +61,48 @@ namespace AeC.Teste.Web.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> UsernameExistsAsync(string username)
+        public async Task<bool> UsernameExistsAsync(string username, int? ignoreUserId = null)
         {
-            return await _context.Users
-                .AnyAsync(x => x.Username == username);
+            var query = _context.Users.Where(x => x.Username == username);
+
+            if (ignoreUserId.HasValue)
+            {
+                query = query.Where(x => x.Id != ignoreUserId.Value);
+            }
+
+            return await query.AnyAsync();
         }
 
-        public Task UpdateAsync(UserEditViewModel model)
+        public async Task UpdateAsync(UserEditViewModel model)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == model.Id);
+
+            if (user == null)
+                throw new InvalidOperationException($"Usuário com ID {model.Id} não encontrado.");
+
+            user.Name = model.Name;
+            user.Username = model.Username;
+
+            if (!string.IsNullOrEmpty(model.Password))
+            {
+                user.PasswordHash = _passwordHasher.HashPassword(user, model.Password);
+            }
+
+            _context.Users.Update(user);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+                throw new InvalidOperationException($"Usuário com ID {id} não encontrado.");
+
+            _context.Users.Remove(user);
+
+            await _context.SaveChangesAsync();
         }
     }
 }
