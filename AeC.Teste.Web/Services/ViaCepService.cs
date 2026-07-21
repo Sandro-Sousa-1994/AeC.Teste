@@ -21,7 +21,6 @@ namespace AeC.Teste.Web.Services
                 if (string.IsNullOrWhiteSpace(cep))
                     return null;
 
-                // Remove caracteres especiais (hífen, etc)
                 var cleanCep = new string(cep.Where(char.IsDigit).ToArray());
 
                 if (cleanCep.Length != 8)
@@ -39,7 +38,6 @@ namespace AeC.Teste.Web.Services
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var result = JsonSerializer.Deserialize<ViaCepResponseDto>(content, options);
 
-                // Se houver erro na resposta da API
                 if (result?.Erro != null)
                     return null;
 

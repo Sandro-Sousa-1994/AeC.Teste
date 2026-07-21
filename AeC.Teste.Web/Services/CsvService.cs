@@ -14,11 +14,9 @@ namespace AeC.Teste.Web.Services
             var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance);
             var sb = new StringBuilder();
 
-            // Adicionar header
             var headerRow = string.Join(",", properties.Select(p => EscapeCsvValue(p.Name)));
             sb.AppendLine(headerRow);
 
-            // Adicionar dados
             foreach (var item in data)
             {
                 var values = properties.Select(p => EscapeCsvValue(p.GetValue(item)?.ToString() ?? ""));
@@ -34,7 +32,6 @@ namespace AeC.Teste.Web.Services
             if (string.IsNullOrEmpty(value))
                 return "\"\"";
 
-            // Se contém aspas, vírgula, quebra de linha - necessário adicionar aspas e escapar
             if (value.Contains("\"") || value.Contains(",") || value.Contains("\n"))
             {
                 return "\"" + value.Replace("\"", "\"\"") + "\"";
