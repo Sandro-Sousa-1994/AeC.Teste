@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/database/">
-    <File Path="001_CreateTables.sql" />
-  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
     <File Path="README.md" />
